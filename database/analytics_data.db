@@ -1,0 +1,40 @@
+CREATE TABLE messages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    sender_id TEXT,
+    receiver_id TEXT,
+    message TEXT,
+    timestamp DATETIME
+);
+
+CREATE TABLE customers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    phone_number TEXT UNIQUE,
+    name TEXT,
+    email TEXT,
+    join_date DATETIME
+);
+
+CREATE TABLE engagement (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    customer_id INTEGER,
+    total_messages_sent INTEGER,
+    total_messages_received INTEGER,
+    last_interaction DATETIME,
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+);
+
+CREATE TABLE performance (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    message_id INTEGER,
+    sentiment_score REAL,
+    message_length INTEGER,
+    response_time INTEGER,
+    FOREIGN KEY (message_id) REFERENCES messages(id)
+);
+
+CREATE TABLE trends (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    trend_name TEXT,
+    trend_value TEXT,
+    timestamp DATETIME
+);
